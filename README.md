@@ -1,145 +1,88 @@
-# Automated Mortgage Underwriting System
+# Autonomous Financial Research Analyst
 
-An Agentic AI Multi‑Agent Workflow for Automated Mortgage Underwriting.
-Built as part of the Johns Hopkins University – Advanced Agentic AI program.
-
+This project develops an autonomous financial research analyst powered by LangChain and LangGraph. The agent is designed to proactively gather comprehensive financial data, analyze market sentiment, retrieve proprietary AI initiative insights, and provide data-driven investment recommendations.
 
 ## Project Overview
 
-The Automated Mortgage Underwriting System is an Agentic AI–powered multi‑agent workflow designed to automate and enhance the mortgage underwriting process. Built using LangGraph, LangChain, and OpenAI GPT‑4o‑mini, this system demonstrates how intelligent agents can collaborate to evaluate loan applications with consistency, transparency, and regulatory compliance.
+Investment research often involves manual data gathering from various sources, making it slow and prone to inconsistencies. This project addresses these challenges by creating an intelligent system that automates much of this process, providing timely and in-depth analysis.
 
-Traditional mortgage underwriting is often time-consuming, document-heavy, inconsistent, and expensive. This AI-powered system addresses these challenges by:
+## Features
 
-- **Reducing processing time** from days to hours.
-- Maintaining **consistent decision quality**.
-- Providing an **audit trail** with clear reasoning chains.
-- Ensuring **regulatory compliance** (e.g., Fair Lending Act).
-- Scaling to handle **thousands of applications** simultaneously.
-
-This project is ideal for learners exploring agentic AI, workflow orchestration, RAG, compliance engineering, and real-world deployment patterns.
-
-## Learning Objectives
-
-By exploring this project, you will be able to:
-
-- **Understand Multi-Agent Systems**: Learn how specialized AI agents collaborate to solve complex problems.
-- **Implement Agent Workflows**: Build coordinated workflows using LangGraph's state machine architecture.
-- **Apply RAG Patterns**: Integrate retrieval-augmented generation for policy compliance.
-- **Handle PII & Compliance**: Implement data sanitization and bias detection mechanisms.
-- **Create HITL Systems**: Design human-in-the-loop workflows for high-risk decisions.
-- **Production Deployment**: Understand real-world deployment considerations and monitoring.
-
-## System Architecture
-
-The system utilizes a hierarchical multi-agent pattern:  
-
-Specialist Agents:
-  -  Credit Analyst Agent
-  -  Income Analyst Agent
-  -  Asset Analyst Agent
-  -  Collateral Analyst Agent
-
-Coordination Agents:
-  -  Supervisor Agent – orchestrates workflow
-  -  Critic Agent – evaluates agent outputs
-  -  Decision Agent – final underwriting decision
-
-A LangGraph state machine coordinates agent interactions, ensuring deterministic and auditable execution.
-    (https://github.com/senthildorairaj/Automated-Mortgage-Underwriting-System/blob/main/System%20Architecture.png)
-
-
-## Technology Stack
-
-- **LangGraph**: Agent orchestration & state management
-- **LangChain**: LLM integration & tool management
-- **OpenAI - GPT-4o-mini**: Language model for reasoning
-- **ChromaDB**: Vector store for policy retrieval
-- **Python**: Programming language
-- **Jupyter / Colab**:  Interactive development
+- **Goal-Oriented Agent Charter**: Defines a clear mission for the agent to generate comprehensive financial analysis reports.
+- **Autonomous Tool Orchestration**: Utilizes 5 specialized tools:
+  - `get_stock_price()`: Fetches real-time stock prices and metrics.
+  - `get_stock_history()`: Retrieves historical stock performance for trend analysis.
+  - `search_financial_news()`: Searches real-time financial news.
+  - `analyze_sentiment()`: Analyzes sentiment of financial text using an LLM.
+  - `query_private_database()`: Accesses private analyst reports and AI initiative documents via Retrieval-Augmented Generation (RAG).
+- **Behavioral Constraints**: Implements proactive, reactive (error handling), and autonomous behaviors to guide decision-making and ensure transparent reporting.
+- **RAG Implementation**: A full RAG pipeline is integrated to unlock insights from private analyst reports, ensuring grounded responses with source citations.
+- **Multi-Company Ranking**: Capable of analyzing and ranking multiple companies based on both financial performance and strategic AI innovation.
+- **Synergistic Tool Usage**: Demonstrates how multiple AI techniques work together to produce comprehensive insights.
 
 ## Setup and Installation
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/senthildorairaj/Automated-Mortgage-Underwriting-System.git
-    cd Automated-Mortgage-Underwriting-System
-    ```
-    
+1.  **Install Dependencies**: Run the first code cell in the notebook to install all required Python packages:
 
-2.  **Install dependencies:**
     ```bash
-    pip install \
-      langgraph==1.0.5 \
-      langchain==1.0.0 \
-      langchain-openai==1.1.7 \
-      langchain-community==0.4.1 \
-      langchain-text-splitters==1.1.0 \
-      chromadb==1.4.0 \
-      pypdf==6.6.0
+    !pip install \
+      langchain==0.3.27 \
+      langchain-core==0.3.79 \
+      langchain-openai==0.3.11 \
+      langchain-community==0.3.31 \
+      langgraph==0.3.7 \
+      tavily-python \
+      yfinance==0.2.66 \
+      chromadb==1.3.4 \
+      pypdf==6.2.0 \
+      tiktoken==0.12.0
     ```
 
-3.  **API Configuration:**
-    This project uses an OpenAI-compatible API. You will need to set your `OPENAI_API_KEY` and `OPENAI_API_BASE` as environment variables or load them from a `config.json` file. Ensure `config.json` contains:
+2.  **Configuration**: Ensure you have a `config.json` file in your environment with the following structure, replacing placeholders with your actual API keys:
+
     ```json
     {
-      "API_KEY": "YOUR_API_KEY",
-      "OPENAI_API_BASE": "YOUR_API_BASE_URL"
+      "API_KEY": "YOUR_OPENAI_API_KEY",
+      "OPENAI_API_BASE": "YOUR_OPENAI_API_BASE_URL",
+      "TAVILY_API_KEY": "YOUR_TAVILY_API_KEY"
     }
     ```
-    *Note: For Google Colab, you can use Colab secrets for API keys.* 
+    The notebook will load these keys into environment variables.
+
+3.  **AI Initiative Documents**: The project uses a `Companies-AI-Initiatives.zip` file. The notebook automatically unzips this file to set up the private database for RAG.
 
 ## Usage
 
-This project is best explored in a Jupyter Notebook or Google Colab environment. The `Automated_Mortgage_Underwriting_System.ipynb` notebook guides you through:
+Run the cells sequentially in the notebook to:
 
-- Defining data models and state management.
-- Building core components like utility tools, PII sanitization, and RAG policy retrieval.
-- Implementing specialist agents (Credit, Income, Asset, Collateral, Critic, Decision).
-- Integrating the complete workflow using LangGraph.
-- Testing and evaluating the system with various test cases.
-- Understanding production deployment considerations.
+- Define the agent's charter and tools.
+- Observe the evolution from a traditional LLM to a full autonomous agent.
+- Test error handling capabilities.
+- Explore the RAG implementation and its integration with the agent.
+- Perform multi-company investment ranking.
 
-To run the notebook:
+### Interactive Testing
 
-1.  Open the .ipynb file in Jupyter or Colab
-2.  Execute cells sequentially to follow the multi-agent workflow development.
-3.  Observe agent interactions and underwriting decisions.
+Use the final interactive cell (`Final Interactive Test Cell`) to experiment with your own custom queries and analyze different companies based on the agent's capabilities.
 
+## Project Structure
 
-### Explanation of the different modules (in case if you need more details):
-### Part 1: Core Agent Implementation
-- Utility tools for calculations 
-- PII sanitization system 
-- Bias detection mechanism
-- RAG policy retrieval
-- Test data preparation
+The notebook is divided into several sections:
 
-### Part 2: Workflow & Orchestration
-- Income Analyst Agent Implementation
-- Asset Analyst Agent Implementation
-- Collateral Analyst Agent Implementation
-- Critic Agent Implementation
-- Decision Agent Implementation
-- Defining state and workflow/graph correctly
+- **Prerequisites**: Package installation and initial imports.
+- **Section 1.1: The Goal (Proactiveness)**: Defines the agent's charter.
+- **Section 1.2: The Tools (Actuators)**: Defines the stock price, stock history, financial news search, and sentiment analysis tools.
+- **Section 1.3: Constraints and Error Handling**: Details the full agent charter with proactive, reactive, and autonomous behaviors.
+- **Building the Agent**: Code for creating the LangGraph agent with different configurations.
+- **Testing the Agent**: Demonstrations of traditional LLM, basic agent, and full autonomous agent behavior, including error handling.
+- **Section 2.1: RAG Implementation**: Steps for loading, chunking, embedding, and storing private AI initiative documents.
+- **Section 2.2: Enhanced Agent with RAG**: Integrates the RAG tool into the agent and updates the charter.
+- **Section 2.3: Testing the Enhanced Agent**: Tests the enhanced agent's ability to utilize RAG for AI research activity checks and synergistic tool usage.
+- **Section 2.4: Investment Recommendation System**: Demonstrates multi-company ranking based on financial and AI innovation criteria.
+- **Summary and Future Scope**: Observations, key learnings, and potential enhancements.
 
-### Part 3: Testing & Analysis
-- Run all test cases
+## Future Enhancements
 
-### Part 4: Summary and Future Scope
-- Summary/Observations about this Project
-- Future scope of this Project 
-
-## Future Scope
-
-- Expand into full AUS capabilities with additional agents and rule engines.
-- Integrate real-time data sources and external APIs (e.g., credit bureaus, bank statements).
-- Build a full UI dashboard and case management system for operational visibility.
-- Add monitoring, logging, and model evaluation pipelines.
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the JHU License - see the LICENSE file for details.
+- **Multi-Agent Specialization**: Introduce specialized agents (Market Data, News Intelligence, Risk Analysis) for deeper insights.
+- **Enterprise Data Integration**: Connect to Bloomberg/Refinitiv APIs, SEC EDGAR feeds, and proprietary research databases.
+- **Advanced Analytics**: Incorporate time-series forecasting, portfolio optimization, and risk scoring models.
